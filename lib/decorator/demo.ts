@@ -1,10 +1,24 @@
+import 'reflect-metadata';
 import { Control } from './control';
 import { Get, Put } from './httpVerbs';
 import Module from './module';
 import { Req, Res, Next, Query, Param, Body } from './routeParams';
 
+import * as express from '../express';
+import { registerModule } from './registerModule';
+import { REFLECT_PATH } from './ReflectConst';
+
+const app = express();
+
+app.set('view engine', 'ejs');
+app.listen(3000);
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+console.log('Express started on port 3000');
+
 @Control('test')
-class App {
+class AppControl {
   private serivce;
 
   constructor(a, b) {
@@ -33,7 +47,13 @@ class BaseService {
 }
 
 @Module({
-  controls: [App],
+  controls: [AppControl],
   providers: [AppService, BaseService]
 })
 class AppModule {}
+
+registerModule(app, [AppModule]);
+
+const app1 = new AppControl(1, 2);
+
+console.log(AppControl, Reflect.getMetadata(REFLECT_PATH, AppControl));

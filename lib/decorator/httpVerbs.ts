@@ -1,23 +1,24 @@
 import camelCase from 'camelcase';
+import { REFLECT_PATH } from './ReflectConst';
 
 const VERBS: string[] = ['GET', 'POST', 'DELETE', 'PUT', 'ALL'];
 
-export const Get = (router: string): MethodDecorator => (...args) => {
-  console.log(router, args);
+type VerbTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'ALL' | 'OPTION';
+
+const createHttpVerbDecorator = (type: VerbTypes) => (
+  router: string
+): MethodDecorator => (target, key, desciptor) => {
+  Reflect.defineMetadata(REFLECT_PATH, router, desciptor.value);
 };
 
-export const Post = (router: string): MethodDecorator => (...args) => {
-  console.log(router, args);
-};
+export const Get = createHttpVerbDecorator('GET');
 
-export const Delete = (router: string): MethodDecorator => (...args) => {
-  console.log(router, args);
-};
+export const Post = createHttpVerbDecorator('POST');
 
-export const Put = (router: string): MethodDecorator => (...args) => {
-  console.log(router, args);
-};
+export const Delete = createHttpVerbDecorator('DELETE');
 
-export const All = (router: string): MethodDecorator => (...args) => {
-  console.log(router, args);
-};
+export const Put = createHttpVerbDecorator('PUT');
+
+export const All = createHttpVerbDecorator('ALL');
+
+export const Option = createHttpVerbDecorator('OPTION');

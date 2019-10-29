@@ -9,6 +9,7 @@ const Module = ({
   controls = [],
   providers = []
 }: ModuleParams): ClassDecorator => (...args) => {
+  console.log(imports, controls, providers);
   console.log(args);
 };
 

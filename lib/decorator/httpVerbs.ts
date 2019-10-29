@@ -1,5 +1,5 @@
 import camelCase from 'camelcase';
-import { REFLECT_PATH } from './ReflectConst';
+import { REFLECT_PATH, REFLECT_METHOD } from './reflectConst';
 
 const VERBS: string[] = ['GET', 'POST', 'DELETE', 'PUT', 'ALL'];
 
@@ -8,6 +8,7 @@ type VerbTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'ALL' | 'OPTION';
 const createHttpVerbDecorator = (type: VerbTypes) => (
   router: string
 ): MethodDecorator => (target, key, desciptor) => {
+  Reflect.defineMetadata(REFLECT_METHOD, type.toLowerCase(), desciptor.value);
   Reflect.defineMetadata(REFLECT_PATH, router, desciptor.value);
 };
 

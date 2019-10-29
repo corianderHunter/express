@@ -4,9 +4,9 @@ import { Get, Put } from './httpVerbs';
 import Module from './module';
 import { Req, Res, Next, Query, Param, Body } from './routeParams';
 
-import * as express from '../express';
-import { registerModule } from './registerModule';
-import { REFLECT_PATH } from './ReflectConst';
+import * as express from '../..';
+import { createApplication } from './createApplication';
+import { REFLECT_PATH } from './reflectConst';
 
 const app = express();
 
@@ -31,7 +31,7 @@ class AppControl {
   }
 
   @Put('/entry2/:id')
-  entry2(@Query a, @Param b, @Body c) {
+  entry2(@Query() a, @Param() b, @Body c) {
     console.log(a, b, c);
   }
 }
@@ -52,8 +52,4 @@ class BaseService {
 })
 class AppModule {}
 
-registerModule(app, [AppModule]);
-
-const app1 = new AppControl(1, 2);
-
-console.log(AppControl, Reflect.getMetadata(REFLECT_PATH, AppControl));
+createApplication([AppModule]);

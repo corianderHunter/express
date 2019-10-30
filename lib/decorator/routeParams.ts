@@ -2,20 +2,27 @@ import { REFLECT_PARAM } from './reflectConst';
 
 type RouteParamTypes = 'PARAM' | 'QUERY' | 'BODY' | 'REQ' | 'RES' | 'NEXT';
 
-const createRouteParamsDecorator = (type: RouteParamTypes, key?: string) => (
+export interface RouteParamMetaData {
+  type: RouteParamTypes;
+  index: number;
+  prop?: string;
+}
+
+const createRouteParamsDecorator = (type: RouteParamTypes, prop?: string) => (
   target,
   key,
   paramIdx
 ) => {
-  const preMetaData = Reflect.getMetadata(REFLECT_PARAM, target, key) || [];
+  const preMetaData: RouteParamMetaData[] =
+    Reflect.getMetadata(REFLECT_PARAM, target, key) || [];
   Reflect.defineMetadata(
     REFLECT_PARAM,
     [
       ...preMetaData,
       {
-        type: type.toLowerCase(),
+        type,
         index: paramIdx,
-        ...(key ? { targetKey: key } : {})
+        ...(prop ? { prop } : {})
       }
     ],
     target,

@@ -1,23 +1,12 @@
 import 'reflect-metadata';
 import { Control } from './control';
-import { Get, Put } from './httpVerbs';
+import { Get, Put, Post } from './httpVerbs';
 import Module from './module';
 import { Req, Res, Next, Query, Param, Body } from './routeParams';
 
-import * as express from '../..';
 import { createApplication } from './createApplication';
-import { REFLECT_PATH } from './reflectConst';
 
-const app = express();
-
-app.set('view engine', 'ejs');
-app.listen(3000);
-app.get('/', function(req, res) {
-  res.send('hello world');
-});
-console.log('Express started on port 3000');
-
-@Control('test')
+@Control('/test')
 class AppControl {
   private serivce;
 
@@ -31,8 +20,28 @@ class AppControl {
   }
 
   @Put('/entry2/:id')
+  entry2(@Query('id') a, @Param() b, @Body c) {
+    return new Date();
+  }
+}
+
+@Control('/demo')
+class DemoControl {
+  private serivce;
+
+  constructor(a, b) {
+    console.log(a, b);
+  }
+
+  @Get('/entry1')
+  async entry1(@Req req, @Res res, @Next next) {
+    console.log(req, res, next);
+  }
+
+  @Post('/demo/:id/:idx')
   entry2(@Query() a, @Param() b, @Body c) {
     console.log(a, b, c);
+    return new Date();
   }
 }
 
@@ -47,9 +56,12 @@ class BaseService {
 }
 
 @Module({
-  controls: [AppControl],
+  controls: [AppControl, DemoControl],
   providers: [AppService, BaseService]
 })
 class AppModule {}
 
-createApplication([AppModule]);
+const app = createApplication([AppModule]);
+
+app.listen(3000);
+console.log('Express started on port 3000');

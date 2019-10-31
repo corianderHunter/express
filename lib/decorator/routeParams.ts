@@ -1,4 +1,5 @@
 import { REFLECT_PARAM } from './reflectConst';
+import { Request, Response, NextFunction } from 'express';
 
 type RouteParamTypes = 'PARAM' | 'QUERY' | 'BODY' | 'REQ' | 'RES' | 'NEXT';
 
@@ -43,3 +44,39 @@ export const Req = createRouteParamsDecorator('REQ');
 export const Res = createRouteParamsDecorator('REQ');
 
 export const Next = createRouteParamsDecorator('NEXT');
+
+export const mapRouteParams = (
+  paramsDecorator: RouteParamMetaData[],
+  req: Request,
+  res: Response,
+  next: NextFunction
+): any[] => {
+  const args = [];
+  args.length = paramsDecorator.length;
+  paramsDecorator.forEach(paramDecorator => {
+    const { type, index, prop } = paramDecorator;
+    switch (type) {
+      case 'PARAM':
+        args[index] = prop ? req.params[prop] : req.params;
+        break;
+      case 'QUERY':
+        args[index] = prop ? req.query[prop] : req.query;
+        break;
+      case 'BODY':
+        args[index] = req.body;
+        break;
+      case 'REQ':
+        args[index] = req;
+        break;
+      case 'RES':
+        args[index] = res;
+        break;
+      case 'NEXT':
+        args[index] = next;
+        break;
+      default:
+        args[index] = undefined;
+    }
+  });
+  return args;
+};

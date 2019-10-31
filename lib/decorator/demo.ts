@@ -27,7 +27,7 @@ class AppControl {
 
 @Control('/demo')
 class DemoControl {
-  private serivce;
+  private serivce = 'service';
 
   constructor(a, b) {
     console.log(a, b);

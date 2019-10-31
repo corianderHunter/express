@@ -3,8 +3,6 @@ import { REFLECT_PATH, REFLECT_METHOD, REFLECT_PARAM } from './reflectConst';
 import { Request, Response, NextFunction } from 'express';
 import { RouteParamMetaData, mapRouteParams } from './routeParams';
 
-const VERBS: string[] = ['GET', 'POST', 'DELETE', 'PUT', 'ALL'];
-
 type VerbTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'ALL' | 'OPTION';
 
 const createHttpVerbDecorator = (type: VerbTypes) => (
@@ -26,7 +24,12 @@ export const All = createHttpVerbDecorator('ALL');
 
 export const Option = createHttpVerbDecorator('OPTION');
 
-export const mapHttpVerbs = (router, control, httpVerbMethods) =>
+export const mapHttpVerbs = (
+  router,
+  control,
+  httpVerbMethods,
+  controlInstance
+) =>
   httpVerbMethods.forEach(({ method, key }) => {
     const methodType: string = Reflect.getMetadata(REFLECT_METHOD, method);
     const path = Reflect.getMetadata(REFLECT_PATH, method);
@@ -37,7 +40,7 @@ export const mapHttpVerbs = (router, control, httpVerbMethods) =>
       path,
       async (req: Request, res: Response, next: NextFunction) => {
         const args = mapRouteParams(params, req, res, next);
-        const result = await Reflect.apply(method, undefined, args);
+        const result = await Reflect.apply(method, controlInstance, args);
         res.json(result);
       }
     );

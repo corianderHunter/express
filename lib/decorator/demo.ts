@@ -46,18 +46,24 @@ class DemoControl {
 }
 
 class AppService {
-  private targer = 'app-service';
-  constructor() {}
+  private target = 'app-service';
+
+  app() {
+    console.log('app');
+  }
 }
 
 class BaseService {
   private target = 'base-service';
-  constructor() {}
+
+  base() {
+    console.log('base');
+  }
 }
 
 @Module({
   controls: [AppControl, DemoControl],
-  providers: [AppService, BaseService]
+  services: [AppService, BaseService]
 })
 class AppModule {}
 

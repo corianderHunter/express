@@ -3,7 +3,7 @@ import { Control } from './control';
 import { Get, Put, Post } from './httpVerbs';
 import Module from './module';
 import { Req, Res, Next, Query, Param, Body } from './routeParams';
-
+import { Inject } from './inject';
 import { createApplication } from './createApplication';
 
 @Control('/test')
@@ -29,24 +29,31 @@ class AppControl {
 class DemoControl {
   private serivce = 'service';
 
-  constructor(a, b) {
-    console.log(a, b);
-  }
+  constructor(private aService, private bService) {}
 
   @Get('/entry1')
   async entry1(@Req req, @Res res, @Next next) {
+    console.log(this);
     console.log(req, res, next);
   }
 
   @Post('/demo/:id/:idx')
-  entry2(@Query() a, @Param() b, @Body c) {
+  entry2(@Query() a, @Param() b, @Body c): Date {
+    console.log(this);
     console.log(a, b, c);
     return new Date();
   }
 }
 
 class AppService {
+  @Inject('target')
   private target = 'app-service';
+
+  @Inject('a')
+  a = 111;
+
+  @Inject('c')
+  static c;
 
   app() {
     console.log('app');

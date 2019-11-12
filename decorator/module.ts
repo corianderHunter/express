@@ -3,9 +3,8 @@ import {
   REFLECT_IMPORT,
   REFLECT_CLASS_MODULE_TYPE,
   REFLECT_CLASS_TYPE,
-  REFLECT_CLASS_SERVICE_TYPE,
   REFLECT_SERVICE
-} from './reflectConst';
+} from "./reflectConst";
 
 interface ModuleParams {
   imports?: any[];
@@ -18,7 +17,7 @@ const Module = ({
   controls = [],
   services = []
 }: ModuleParams): ClassDecorator => target => {
-  if (!controls.length) throw new Error('controls can not be Empty!');
+  if (!controls.length) throw new Error("controls can not be Empty!");
   console;
   Reflect.defineMetadata(REFLECT_CLASS_TYPE, REFLECT_CLASS_MODULE_TYPE, target);
   Reflect.defineMetadata(REFLECT_CONTROL, controls, target);

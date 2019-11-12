@@ -1,9 +1,8 @@
-import camelCase from 'camelcase';
-import { REFLECT_PATH, REFLECT_METHOD, REFLECT_PARAM } from './reflectConst';
-import { Request, Response, NextFunction } from 'express';
-import { RouteParamMetaData, mapRouteParams } from './routeParams';
+import { REFLECT_PATH, REFLECT_METHOD, REFLECT_PARAM } from "./reflectConst";
+import { Request, Response, NextFunction } from "express";
+import { RouteParamMetaData, mapRouteParams } from "./routeParams";
 
-type VerbTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'ALL' | 'OPTION';
+type VerbTypes = "GET" | "POST" | "DELETE" | "PUT" | "ALL" | "OPTION";
 
 const createHttpVerbDecorator = (type: VerbTypes) => (
   router: string
@@ -12,17 +11,17 @@ const createHttpVerbDecorator = (type: VerbTypes) => (
   Reflect.defineMetadata(REFLECT_PATH, router, desciptor.value);
 };
 
-export const Get = createHttpVerbDecorator('GET');
+export const Get = createHttpVerbDecorator("GET");
 
-export const Post = createHttpVerbDecorator('POST');
+export const Post = createHttpVerbDecorator("POST");
 
-export const Delete = createHttpVerbDecorator('DELETE');
+export const Delete = createHttpVerbDecorator("DELETE");
 
-export const Put = createHttpVerbDecorator('PUT');
+export const Put = createHttpVerbDecorator("PUT");
 
-export const All = createHttpVerbDecorator('ALL');
+export const All = createHttpVerbDecorator("ALL");
 
-export const Option = createHttpVerbDecorator('OPTION');
+export const Option = createHttpVerbDecorator("OPTION");
 
 export const mapHttpVerbs = (
   router,
@@ -33,9 +32,11 @@ export const mapHttpVerbs = (
   httpVerbMethods.forEach(({ method, key }) => {
     const methodType: string = Reflect.getMetadata(REFLECT_METHOD, method);
     const path = Reflect.getMetadata(REFLECT_PATH, method);
-    const params = Reflect.getMetadata(REFLECT_PARAM, control.prototype, key as
-      | symbol
-      | string) as RouteParamMetaData[];
+    const params = Reflect.getMetadata(
+      REFLECT_PARAM,
+      control.prototype,
+      key as symbol | string
+    ) as RouteParamMetaData[];
     router[methodType.toLowerCase()](
       path,
       async (req: Request, res: Response, next: NextFunction) => {

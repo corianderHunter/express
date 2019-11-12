@@ -1,16 +1,16 @@
-import * as express from '../..';
+import * as express from "../lib/express";
 import {
   REFLECT_CLASS_TYPE,
   REFLECT_CLASS_MODULE_TYPE,
   REFLECT_CONTROL,
   REFLECT_SERVICE
-} from './reflectConst';
-import * as bodyParser from 'body-parser';
-import { Application, Router } from 'express';
-import { mapControl } from './control';
+} from "./reflectConst";
+import * as bodyParser from "body-parser";
+import { Application, Router } from "express";
+import { mapControl } from "./control";
 
 export function createApplication(modules: any[]): Application {
-  if (!modules.length) throw new Error('modules can not be empty!');
+  if (!modules.length) throw new Error("modules can not be empty!");
   for (let i = 0; i < modules.length; i++) {
     if (
       Reflect.getMetadata(REFLECT_CLASS_TYPE, modules[i]) !==

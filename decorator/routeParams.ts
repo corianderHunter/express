@@ -1,7 +1,7 @@
-import { REFLECT_PARAM } from './reflectConst';
-import { Request, Response, NextFunction } from 'express';
+import { REFLECT_PARAM } from "./reflectConst";
+import { Request, Response, NextFunction } from "express";
 
-type RouteParamTypes = 'PARAM' | 'QUERY' | 'BODY' | 'REQ' | 'RES' | 'NEXT';
+type RouteParamTypes = "PARAM" | "QUERY" | "BODY" | "REQ" | "RES" | "NEXT";
 
 export interface RouteParamMetaData {
   type: RouteParamTypes;
@@ -32,18 +32,18 @@ const createRouteParamsDecorator = (type: RouteParamTypes, prop?: string) => (
 };
 
 export const Param = (key?: string): ParameterDecorator =>
-  createRouteParamsDecorator('PARAM', key);
+  createRouteParamsDecorator("PARAM", key);
 
 export const Query = (key?: string): ParameterDecorator =>
-  createRouteParamsDecorator('QUERY', key);
+  createRouteParamsDecorator("QUERY", key);
 
-export const Body = createRouteParamsDecorator('BODY');
+export const Body = createRouteParamsDecorator("BODY");
 
-export const Req = createRouteParamsDecorator('REQ');
+export const Req = createRouteParamsDecorator("REQ");
 
-export const Res = createRouteParamsDecorator('REQ');
+export const Res = createRouteParamsDecorator("REQ");
 
-export const Next = createRouteParamsDecorator('NEXT');
+export const Next = createRouteParamsDecorator("NEXT");
 
 export const mapRouteParams = (
   paramsDecorator: RouteParamMetaData[],
@@ -56,22 +56,22 @@ export const mapRouteParams = (
   paramsDecorator.forEach(paramDecorator => {
     const { type, index, prop } = paramDecorator;
     switch (type) {
-      case 'PARAM':
+      case "PARAM":
         args[index] = prop ? req.params[prop] : req.params;
         break;
-      case 'QUERY':
+      case "QUERY":
         args[index] = prop ? req.query[prop] : req.query;
         break;
-      case 'BODY':
+      case "BODY":
         args[index] = req.body;
         break;
-      case 'REQ':
+      case "REQ":
         args[index] = req;
         break;
-      case 'RES':
+      case "RES":
         args[index] = res;
         break;
-      case 'NEXT':
+      case "NEXT":
         args[index] = next;
         break;
       default:

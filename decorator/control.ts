@@ -28,7 +28,7 @@ export const mapControl = (
     Reflect.getMetadata(REFLECT_CLASS_TYPE, control) !==
     REFLECT_CLASS_CONTROL_TYPE
   )
-    throw new Error(control + `is not a Module`);
+    throw new Error(control + `is not a Control`);
 
   let controlConstructorParams: any[];
   if (services.length) {

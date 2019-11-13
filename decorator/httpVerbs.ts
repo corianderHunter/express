@@ -1,6 +1,12 @@
-import { REFLECT_PATH, REFLECT_METHOD, REFLECT_PARAM } from "./reflectConst";
+import {
+  REFLECT_PATH,
+  REFLECT_METHOD,
+  REFLECT_PARAM,
+  REFLECT_MIDDLEWARE
+} from "./reflectConst";
 import { Request, Response, NextFunction } from "express";
-import { RouteParamMetaData, mapRouteParams } from "./routeParams";
+import { RouteParamMetaData, mapRouteParams, Next } from "./routeParams";
+import { Control } from "./control";
 
 type VerbTypes = "GET" | "POST" | "DELETE" | "PUT" | "ALL" | "OPTION";
 
@@ -28,7 +34,11 @@ export const mapHttpVerbs = (
   control,
   httpVerbMethods,
   controlInstance
-) =>
+) => {
+  const middlewares = Reflect.getMetadata(REFLECT_MIDDLEWARE, control) || [];
+  const applyMiddleWares = middlewares.length
+    ? middlewares
+    : [(req, res, next) => next()];
   httpVerbMethods.forEach(({ method, key }) => {
     const methodType: string = Reflect.getMetadata(REFLECT_METHOD, method);
     const path = Reflect.getMetadata(REFLECT_PATH, method);
@@ -39,6 +49,7 @@ export const mapHttpVerbs = (
     ) as RouteParamMetaData[];
     router[methodType.toLowerCase()](
       path,
+      ...applyMiddleWares,
       async (req: Request, res: Response, next: NextFunction) => {
         const args = mapRouteParams(params, req, res, next);
         const result = await Reflect.apply(method, controlInstance, args);
@@ -46,3 +57,4 @@ export const mapHttpVerbs = (
       }
     );
   });
+};

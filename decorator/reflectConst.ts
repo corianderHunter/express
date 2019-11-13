@@ -10,6 +10,8 @@ export const REFLECT_METHOD = Symbol("__method__");
 
 export const REFLECT_PARAM = Symbol("__param__");
 
+export const REFLECT_MIDDLEWARE = Symbol("__middleware__");
+
 export const REFLECT_CLASS_TYPE = Symbol("__type:class");
 
 export const REFLECT_CLASS_CONTROL_TYPE = "control";
@@ -17,7 +19,5 @@ export const REFLECT_CLASS_CONTROL_TYPE = "control";
 export const REFLECT_CLASS_SERVICE_TYPE = "service";
 
 export const REFLECT_CLASS_MODULE_TYPE = "module";
-
-export const REFLECT_CLASS_MIDDLEWARE_TYPE = "middleware";
 
 export const REFLECT_INJECTS = "inject";

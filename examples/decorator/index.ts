@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { Control } from "../../decorator/control";
 import { Get, Put, Post } from "../../decorator/httpVerbs";
 import Module from "../../decorator/module";
+import Middleware from "../../decorator/middleware";
 import {
   Req,
   Res,
@@ -13,7 +14,13 @@ import {
 import { Inject, Injectable } from "../../decorator/inject";
 import { createApplication } from "../../decorator/createApplication";
 
+const testMiddle = (req, res, next) => {
+  console.log("testMiddle");
+  next();
+};
+
 @Control("/test")
+@Middleware(testMiddle)
 class AppControl {
   private serivce;
 
@@ -50,8 +57,6 @@ class DemoControl {
   @Post("/demo/:id/:idx")
   entry2(@Query() a, @Param() b, @Body c): Date {
     console.log(this);
-    console.log(a, b, c);
-    console.log(this.aService);
     this.aService.app();
     return new Date();
   }

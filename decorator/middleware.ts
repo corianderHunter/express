@@ -1,8 +1,4 @@
-import {
-  REFLECT_CLASS_TYPE,
-  REFLECT_PATH,
-  REFLECT_CLASS_MIDDLEWARE_TYPE
-} from "./reflectConst";
+import { REFLECT_MIDDLEWARE } from "./reflectConst";
 import { Request, Response, NextFunction } from "express";
 
 type MiddlewareFunctionType = (
@@ -11,13 +7,15 @@ type MiddlewareFunctionType = (
   next: NextFunction
 ) => any;
 
-export function Middleware(middleware: MiddlewareFunctionType): ClassDecorator {
+export default function Middleware(
+  middleware: MiddlewareFunctionType
+): ClassDecorator {
   return function(target) {
+    const middlewares = Reflect.getMetadata(REFLECT_MIDDLEWARE, target) || [];
     Reflect.defineMetadata(
-      REFLECT_CLASS_TYPE,
-      REFLECT_CLASS_MIDDLEWARE_TYPE,
+      REFLECT_MIDDLEWARE,
+      [...middlewares, middleware],
       target
     );
-    Reflect.defineMetadata(REFLECT_PATH, name, target);
   };
 }

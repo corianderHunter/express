@@ -6,7 +6,8 @@
     "target": "es5",
     "module": "commonjs",
     "sourceMap": false,
-    "outDir": "./lib/decorator"
+    "outDir": "./lib/decorator",
+    "declaration": true
   },
   "include": ["decorator/**/*"]
 }

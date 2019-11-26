@@ -2,7 +2,9 @@ import "reflect-metadata";
 
 export * from "./control";
 
-export * from "./createApplication";
+import createApplication from "./createApplication";
+
+export default createApplication;
 
 export * from "./httpVerbs";
 

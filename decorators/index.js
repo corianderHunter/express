@@ -5,7 +5,8 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 __export(require("./control"));
-__export(require("./createApplication"));
+var createApplication_1 = require("./createApplication");
+exports.default = createApplication_1.default;
 __export(require("./httpVerbs"));
 __export(require("./inject"));
 __export(require("./module"));

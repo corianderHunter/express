@@ -28,4 +28,4 @@ function createApplication(modules) {
     });
     return app;
 }
-exports.createApplication = createApplication;
+exports.default = createApplication;

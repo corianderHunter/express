@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { Control } from "../../decorator/control";
 import { Get, Put, Post } from "../../decorator/httpVerbs";
-import Module from "../../decorator/module";
+import { Module } from "../../decorator/module";
 import Middleware from "../../decorator/middleware";
 import {
   Req,
@@ -12,7 +12,7 @@ import {
   Body
 } from "../../decorator/routeParams";
 import { Inject, Injectable } from "../../decorator/inject";
-import { createApplication } from "../../decorator/createApplication";
+import createApplication from "../../decorator/createApplication";
 
 const testMiddle = (req, res, next) => {
   console.log("testMiddle");

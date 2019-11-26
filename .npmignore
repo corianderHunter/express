@@ -1,0 +1,11 @@
+node_modules
+benchmarks
+test
+decorator
+Collaborator-Guide.md
+Contributing
+*.yml
+package-lock.json
+.editorconfig
+.eslintignore
+.gitignore

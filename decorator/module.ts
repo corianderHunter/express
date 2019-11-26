@@ -12,7 +12,7 @@ interface ModuleParams {
   services?: any[];
 }
 
-const Module = ({
+export const Module = ({
   imports = [],
   controls = [],
   services = []
@@ -24,5 +24,3 @@ const Module = ({
   Reflect.defineMetadata(REFLECT_IMPORT, imports, target);
   Reflect.defineMetadata(REFLECT_SERVICE, services, target);
 };
-
-export default Module;

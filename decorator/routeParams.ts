@@ -51,6 +51,7 @@ export const mapRouteParams = (
   res: Response,
   next: NextFunction
 ): any[] => {
+  if (!paramsDecorator || !paramsDecorator.length) return [req, res, next];
   const args = [];
   args.length = paramsDecorator.length;
   paramsDecorator.forEach(paramDecorator => {

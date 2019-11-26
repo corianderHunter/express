@@ -36,6 +36,8 @@ exports.Req = createRouteParamsDecorator("REQ");
 exports.Res = createRouteParamsDecorator("REQ");
 exports.Next = createRouteParamsDecorator("NEXT");
 exports.mapRouteParams = function (paramsDecorator, req, res, next) {
+    if (!paramsDecorator || !paramsDecorator.length)
+        return [req, res, next];
     var args = [];
     args.length = paramsDecorator.length;
     paramsDecorator.forEach(function (paramDecorator) {

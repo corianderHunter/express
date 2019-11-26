@@ -9,7 +9,7 @@ import * as bodyParser from "body-parser";
 import { Application, Router } from "express";
 import { mapControl } from "./control";
 
-export default function createApplication(modules: any[]): Application {
+function createApplication(modules: any[]): Application {
   if (!modules.length) throw new Error("modules can not be empty!");
   for (let i = 0; i < modules.length; i++) {
     if (
@@ -32,3 +32,5 @@ export default function createApplication(modules: any[]): Application {
   });
   return app;
 }
+
+export default createApplication;

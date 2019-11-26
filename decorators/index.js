@@ -9,4 +9,5 @@ __export(require("./createApplication"));
 __export(require("./httpVerbs"));
 __export(require("./inject"));
 __export(require("./module"));
+__export(require("./middleware"));
 __export(require("./routeParams"));

@@ -1,2 +1,3 @@
 import { Application } from "express";
-export default function createApplication(modules: any[]): Application;
+declare function createApplication(modules: any[]): Application;
+export default createApplication;

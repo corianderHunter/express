@@ -14,4 +14,4 @@ function Middleware(middleware) {
         Reflect.defineMetadata(reflectConst_1.REFLECT_MIDDLEWARE, __spreadArrays(middlewares, [middleware]), target);
     };
 }
-exports.default = Middleware;
+exports.Middleware = Middleware;

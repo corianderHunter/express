@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { Control } from "../../decorator/control";
 import { Get, Put, Post } from "../../decorator/httpVerbs";
 import { Module } from "../../decorator/module";
-import Middleware from "../../decorator/middleware";
+import { Middleware } from "../../decorator/middleware";
 import {
   Req,
   Res,

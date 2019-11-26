@@ -4,4 +4,5 @@ export * from "./createApplication";
 export * from "./httpVerbs";
 export * from "./inject";
 export * from "./module";
+export * from "./middleware";
 export * from "./routeParams";

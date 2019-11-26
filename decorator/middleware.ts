@@ -7,9 +7,7 @@ type MiddlewareFunctionType = (
   next: NextFunction
 ) => any;
 
-export default function Middleware(
-  middleware: MiddlewareFunctionType
-): ClassDecorator {
+export function Middleware(middleware: MiddlewareFunctionType): ClassDecorator {
   return function(target) {
     const middlewares = Reflect.getMetadata(REFLECT_MIDDLEWARE, target) || [];
     Reflect.defineMetadata(

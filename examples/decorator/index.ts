@@ -35,7 +35,7 @@ class AppControl {
 
   @Put("/entry2/:id")
   entry2(@Query("id") a, @Param() b, @Body c, @Req req, @Res res) {
-    console.log(req, res);
+    res.test1(111);
     res.send("11");
     return 222;
   }

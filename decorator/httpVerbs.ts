@@ -51,12 +51,20 @@ export const mapHttpVerbs = (
       path,
       ...applyMiddleWares,
       async (req: Request, res: Response, next: NextFunction) => {
-        const args = mapRouteParams(params, req, res, next);
-        const result = await Reflect.apply(method, controlInstance, args);
-        if (!res.headersSent) {
-          res.json(result || "");
+        try {
+          const args = mapRouteParams(params, req, res, next);
+          const result = await Reflect.apply(method, controlInstance, args);
+          if (!res.headersSent) {
+            res.json(result || "");
+          }
+        } catch (e) {
+          handleExpection(e || {}, res);
         }
       }
     );
   });
+};
+
+const handleExpection = (e, res: Response) => {
+  res.status(500).send(e.message || "Oops,server error...");
 };

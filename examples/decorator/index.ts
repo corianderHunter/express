@@ -50,6 +50,20 @@ class DemoControl {
 
   constructor(private aService, private bService) {}
 
+  @Get("/sendFile")
+  async sendFile(@Res res) {
+    res.sendFile(
+      "/Users/weidonghua/Code/clinkz/output/c88f75c0-10ed-11ea-bc9f-a9f1b141a343.md",
+      {
+        headers: {
+          "Content-Disposition":
+            'attachment; filename="c88f75c0-10ed-11ea-bc9f-a9f1b141a343.md"'
+        }
+      }
+    );
+    return false;
+  }
+
   @Get("/entry1")
   async entry1(@Res res, @Req req, @Next next) {
     console.log(this);

@@ -54,7 +54,7 @@ export const mapHttpVerbs = (
         try {
           const args = mapRouteParams(params, req, res, next);
           const result = await Reflect.apply(method, controlInstance, args);
-          if (!res.headersSent) {
+          if (result !== false && !res.headersSent) {
             res.json(result || "");
           }
         } catch (e) {

@@ -66,10 +66,11 @@ exports.mapHttpVerbs = function (router, control, httpVerbMethods, controlInstan
         var path = Reflect.getMetadata(reflectConst_1.REFLECT_PATH, method);
         var params = Reflect.getMetadata(reflectConst_1.REFLECT_PARAM, control.prototype, key);
         router[methodType.toLowerCase()].apply(router, __spreadArrays([path], applyMiddleWares, [function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-                var args, result;
+                var args, result, e_1;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
+                            _a.trys.push([0, 2, , 3]);
                             args = routeParams_1.mapRouteParams(params, req, res, next);
                             return [4 /*yield*/, Reflect.apply(method, controlInstance, args)];
                         case 1:
@@ -77,9 +78,17 @@ exports.mapHttpVerbs = function (router, control, httpVerbMethods, controlInstan
                             if (!res.headersSent) {
                                 res.json(result || "");
                             }
-                            return [2 /*return*/];
+                            return [3 /*break*/, 3];
+                        case 2:
+                            e_1 = _a.sent();
+                            handleExpection(e_1 || {}, res);
+                            return [3 /*break*/, 3];
+                        case 3: return [2 /*return*/];
                     }
                 });
             }); }]));
     });
+};
+var handleExpection = function (e, res) {
+    res.status(500).send(e.message || "Oops,server error...");
 };

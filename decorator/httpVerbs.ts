@@ -6,7 +6,7 @@ import {
 } from "./reflectConst";
 import { Request, Response, NextFunction } from "express";
 import { RouteParamMetaData, mapRouteParams, Next } from "./routeParams";
-import { Control } from "./control";
+import * as assert from "assert";
 
 type VerbTypes = "GET" | "POST" | "DELETE" | "PUT" | "ALL" | "OPTION";
 
@@ -53,7 +53,9 @@ export const mapHttpVerbs = (
       async (req: Request, res: Response, next: NextFunction) => {
         const args = mapRouteParams(params, req, res, next);
         const result = await Reflect.apply(method, controlInstance, args);
-        res.json(result);
+        if (!res.headersSent) {
+          res.json(result || "");
+        }
       }
     );
   });

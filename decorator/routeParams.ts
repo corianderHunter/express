@@ -41,7 +41,7 @@ export const Body = createRouteParamsDecorator("BODY");
 
 export const Req = createRouteParamsDecorator("REQ");
 
-export const Res = createRouteParamsDecorator("REQ");
+export const Res = createRouteParamsDecorator("RES");
 
 export const Next = createRouteParamsDecorator("NEXT");
 

@@ -74,7 +74,9 @@ exports.mapHttpVerbs = function (router, control, httpVerbMethods, controlInstan
                             return [4 /*yield*/, Reflect.apply(method, controlInstance, args)];
                         case 1:
                             result = _a.sent();
-                            res.json(result);
+                            if (!res.headersSent) {
+                                res.json(result || "");
+                            }
                             return [2 /*return*/];
                     }
                 });

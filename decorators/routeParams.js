@@ -33,7 +33,7 @@ exports.Query = function (key) {
 };
 exports.Body = createRouteParamsDecorator("BODY");
 exports.Req = createRouteParamsDecorator("REQ");
-exports.Res = createRouteParamsDecorator("REQ");
+exports.Res = createRouteParamsDecorator("RES");
 exports.Next = createRouteParamsDecorator("NEXT");
 exports.mapRouteParams = function (paramsDecorator, req, res, next) {
     if (!paramsDecorator || !paramsDecorator.length)

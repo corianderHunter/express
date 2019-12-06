@@ -75,7 +75,7 @@ exports.mapHttpVerbs = function (router, control, httpVerbMethods, controlInstan
                             return [4 /*yield*/, Reflect.apply(method, controlInstance, args)];
                         case 1:
                             result = _a.sent();
-                            if (!res.headersSent) {
+                            if (result !== false && !res.headersSent) {
                                 res.json(result || "");
                             }
                             return [3 /*break*/, 3];

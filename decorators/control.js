@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mapControl = exports.Control = void 0;
 var reflectConst_1 = require("./reflectConst");
 var express = require("../lib/express");
 var httpVerbs_1 = require("./httpVerbs");

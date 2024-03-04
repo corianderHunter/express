@@ -7,6 +7,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Middleware = void 0;
 var reflectConst_1 = require("./reflectConst");
 function Middleware(middleware) {
     return function (target) {

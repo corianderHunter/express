@@ -43,6 +43,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mapHttpVerbs = exports.Option = exports.All = exports.Put = exports.Delete = exports.Post = exports.Get = void 0;
 var reflectConst_1 = require("./reflectConst");
 var routeParams_1 = require("./routeParams");
 var createHttpVerbDecorator = function (type) { return function (router) { return function (target, key, desciptor) {

@@ -18,6 +18,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mapRouteParams = exports.Next = exports.Res = exports.Req = exports.Body = exports.Query = exports.Param = void 0;
 var reflectConst_1 = require("./reflectConst");
 var createRouteParamsDecorator = function (type, prop) { return function (target, key, paramIdx) {
     var preMetaData = Reflect.getMetadata(reflectConst_1.REFLECT_PARAM, target, key) || [];

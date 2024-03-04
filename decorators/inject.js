@@ -7,6 +7,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mapInject = exports.Inject = exports.Injectable = exports.injectContainer = void 0;
 var reflectConst_1 = require("./reflectConst");
 exports.injectContainer = new Map();
 exports.Injectable = function (name) { return function (target) {
